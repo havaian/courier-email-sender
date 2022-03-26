@@ -8,13 +8,13 @@ const { requestId } = await courier.send({
   message: {
     to: {
       data: {
-        name: "Snapfire",
+        name: "Marty",
       },
-      email: "snapfirecookie@gmail.com",
+      email: "marty@mcfly.com",
     },
     content: {
-      title: "{{name}}",
-      body: "It's cookie time. Hold yer lizards, already. I'm here. Who wants some battle biscuits? You tell 'em {{name}}'s comin! And hell's comin with me!",
+      title: "Back to the future!",
+      body: "Oh my, {{name}}, we need 1.21 Gigawatts!",
     },
     routing: {
       method: "single",

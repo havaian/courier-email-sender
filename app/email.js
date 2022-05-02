@@ -44,20 +44,30 @@ var mailOptions = {
   text: 'That was easy!'
 };
 
-app.post('/send', (req, res) => {
-    
+async function sendmail() {
     try {
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
+        const value = await schema.validateAsync(mailOptions);
+        console.log(value);
+        if (!value.error) {
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                console.log(error);
+                } else {
+                console.log('Email sent: ' + info.response);
+                }
+            });
+        } else {
             console.log(error);
-            } else {
-            console.log('Email sent: ' + info.response);
-            }
-        });
+        }
     }
     catch (err) {
         console.log(err);
     }
+}
+
+app.post('/send', (req, res) => {
+    
+    sendmail();
     
 });
 
@@ -65,7 +75,6 @@ app.post('/send', (req, res) => {
 
 // async function wrappedSendMail(mailOptions) {
 //     return new Promise((resolve,reject)=>{
-
 //         let transporter = nodemailer.createTransport({
 //             service: 'gmail',
 //             auth: {

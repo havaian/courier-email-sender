@@ -17,7 +17,6 @@ var transporter = nodemailer.createTransport({
 
 async function wrappedSendMail(mailOptions) {
     return new Promise((resolve,reject)=>{
-
         let transporter = nodemailer.nodemailer.createTransport({
             service: 'gmail',
             auth: {

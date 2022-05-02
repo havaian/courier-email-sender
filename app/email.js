@@ -44,76 +44,61 @@ var mailOptions = {
   text: 'That was easy!'
 };
 
-// app.post('/send', (req, res) => {
+app.post('/send', (req, res) => {
     
-//     try {
-//         const value = schema.validateAsync(mailOptions);
-//         transporter.sendMail(mailOptions, function(error, info){
-//             if (error) {
-//             console.log(error);
-//             } else {
-//             console.log('Email sent: ' + info.response);
+    try {
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+            console.log(error);
+            } else {
+            console.log('Email sent: ' + info.response);
+            }
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+    
+});
+
+// FOR TEST ONLY
+
+// async function wrappedSendMail(mailOptions) {
+//     return new Promise((resolve,reject)=>{
+
+//         let transporter = nodemailer.createTransport({
+//             service: 'gmail',
+//             auth: {
+//             user: myEmail,
+//             pass: myPassword
 //             }
 //         });
-//     }
-//     catch (err) {
-//         console.log(err);
-//     }
-    
-// });
 
-async function wrappedSendMail(mailOptions) {
-    return new Promise((resolve,reject)=>{
+//         transporter.sendMail(mailOptions, function(error, info) {
+//             if (error) {
+//                 console.log("error is "+error);
+//                 resolve(false); // or use rejcet(false) but then you will have to handle errors
+//             } else {
+//                 console.log('Email sent: ' + info.response);
+//                 resolve(true);
+//             }
+//         });
+//     });
+// };
 
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-            user: myEmail,
-            pass: myPassword
-            }
-        });
+// const sendmail = async(req) => {      
+//     var mailOptions = {
+//         from: myEmail,
+//         to: sendEmail,
+//         subject: 'Sending Email using Node.js',
+//         text: 'That was easy!'
+//     };
+//     let resp = await wrappedSendMail(mailOptions);
+//     console.log(resp);
+//     return resp;
+// } 
 
-        transporter.sendMail(mailOptions, function(error, info) {
-            if (error) {
-                console.log("error is "+error);
-                resolve(false); // or use rejcet(false) but then you will have to handle errors
-            } else {
-                console.log('Email sent: ' + info.response);
-                resolve(true);
-            }
-        });
-    });
-};
-
-const sendmail = async(req) => {      
-    var mailOptions = {
-        from: myEmail,
-        to: sendEmail,
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!'
-    };
-    let resp = await wrappedSendMail(mailOptions);
-    console.log(resp);
-    return resp;
-} 
-
-sendmail();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// sendmail();
 
 
 
